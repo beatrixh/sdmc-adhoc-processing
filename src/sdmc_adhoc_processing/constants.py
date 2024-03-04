@@ -1,4 +1,43 @@
-spec_map = {
+LDMS_PATH_HVTN = '/data/pipelines/fstrf-ldms-postimport/hvtn/hvtn.csdb.csv'
+# LDMS_PATH_HVTN = '/networks/vtn/lab/SDMC_labscience/operations/documents/templates/assay/template_testing/process_testing/fake_ldms.csv'
+LDMS_PATH_COVPN = '/data/pipelines/fstrf-ldms-postimport/covpn/covpn.csdb.csv'
+
+LDMS_COLUMNS = [
+    'labid', 'lims', 'parusp', 'uspeci', 'clasid', 'patid', 'txtpid',
+    'drawdm', 'drawdd', 'drawdy', 'recdtm', 'recdtd', 'recdty', 'drawth',
+    'drawtm', 'rec_tm', 'vidval', 'vidstr', 'lstudy', 'id3', 'guspec',
+    'specid', 'sec_id', 'primstr', 'addstr', 'dervstr', 'dervst2', 'sec_tp',
+    'rlprot', 'volume', 'volstr', 'privol', 'pvlunt', 'proctm', 'procdm',
+    'procdd', 'procdy', 'ptinit', 'frzdtm', 'frzdtd', 'frzdty', 'froztm',
+    'cellct', 'condstr', 'cond2', 'noprot', 'avalbl', 'addtim', 'addunt',
+    'stored', 'stordm', 'stordd', 'stordy', 'sttemp', 'shipfg', 'tolab',
+    'shipno', 'shptmp', 'shipdm', 'shipdd', 'shipdy', 'frlab', 'rb_no',
+    'rcvtmp', 'recvdm', 'recvdd', 'recvdy', 'clinic', 'commts', 'logtyp',
+    'creas', 'cxtype', 'cxuspe', 'cxdatm', 'cxdatd', 'cxdaty', 'defund',
+    'frzer', 'level1', 'level2', 'contai', 'posit', 'conhum', 'conoth',
+    'sysdte', 'ldchng'
+]
+
+STANDARD_COLS = [
+    'labid', 'txtpid', 'drawdm', 'drawdd', 'drawdy',
+    'vidval', 'lstudy', 'guspec', 'primstr', 'addstr', 'dervstr'
+]
+
+LDMS_RELABEL_DICT = {
+    'labid': 'upload_lab_id',
+    'txtpid': 'ptid',
+    'drawdm': 'drawdm',
+    'drawdd': 'drawdd',
+    'drawdy': 'drawdy',
+    'vidval': 'visitno',
+    'lstudy': 'protocol',
+    'guspec': 'guspec',
+    'primstr': 'spec_primary',
+    'addstr': 'spec_additive',
+    'dervstr': 'spec_derivative',
+}
+
+SPEC_TYPE_DEFN_MAP = {
     ('BLD','PLA'): 'Plasma',
     ('BLD','SER'): 'Serum',
     ('REC','SPG'): 'Rectal Sponge',
@@ -22,18 +61,4 @@ spec_map = {
     ('VCS', "N/A"): 'Cervicovaginal Secretions',
     ('BLD', "N/A"): 'Whole Blood',
     ('VCS', 'SWB'): 'Cervicovaginal Secretions (Swab)'
-}
-
-ldms_relabel_dict = {
-    'labid': 'upload_lab_id',
-    'txtpid': 'ptid',
-    'drawdm': 'drawdm',
-    'drawdd': 'drawdd',
-    'drawdy': 'drawdy',
-    'vidval': 'visitno',
-    'lstudy': 'protocol',
-    'guspec': 'guspec',
-    'primstr': 'spec_primary',
-    'addstr': 'spec_additive',
-    'dervstr': 'spec_derivative',
 }

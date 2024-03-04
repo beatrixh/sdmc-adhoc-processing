@@ -1,10 +1,10 @@
 [project]
 name = "sdmc_adhoc_processing"
-version = "0.0.1"
+version = "0.1.2"
 authors = [
   { name="Beatrix Haddock", email="beatrix.haddock@gmail.com" },
 ]
-description = "Helper functions for SDMC ad-hoc data processing requests."
+description = "Helper utilities for SDMC ad-hoc data processing requests."
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
@@ -17,5 +17,5 @@ classifiers = [
 Homepage = "https://github.com/beatrixh/sdmc-adhoc-processing"
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "pandas", "typing", "datetime"]
 build-backend = "hatchling.build"
