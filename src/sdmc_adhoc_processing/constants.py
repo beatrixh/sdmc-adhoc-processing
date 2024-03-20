@@ -1,6 +1,6 @@
 LDMS_PATH_HVTN = '/data/pipelines/fstrf-ldms-postimport/hvtn/hvtn.csdb.csv'
-# LDMS_PATH_HVTN = '/networks/vtn/lab/SDMC_labscience/operations/documents/templates/assay/template_testing/process_testing/fake_ldms.csv'
 LDMS_PATH_COVPN = '/data/pipelines/fstrf-ldms-postimport/covpn/covpn.csdb.csv'
+FAKE_LDMS = '/networks/vtn/lab/SDMC_labscience/operations/documents/templates/assay/template_testing/process_testing/generated_ldms.csv'
 
 LDMS_COLUMNS = [
     'labid', 'lims', 'parusp', 'uspeci', 'clasid', 'patid', 'txtpid',
@@ -19,12 +19,11 @@ LDMS_COLUMNS = [
 ]
 
 STANDARD_COLS = [
-    'labid', 'txtpid', 'drawdm', 'drawdd', 'drawdy',
+    'txtpid', 'drawdm', 'drawdd', 'drawdy',
     'vidval', 'lstudy', 'guspec', 'primstr', 'addstr', 'dervstr'
 ]
 
 LDMS_RELABEL_DICT = {
-    'labid': 'upload_lab_id',
     'txtpid': 'ptid',
     'drawdm': 'drawdm',
     'drawdd': 'drawdd',

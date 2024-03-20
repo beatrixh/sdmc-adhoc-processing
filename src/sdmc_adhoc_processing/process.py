@@ -24,7 +24,9 @@ class DataHandler:
         self.processed_data = input_data
 
     def load_ldms(
-        self, usecols: List[str] = constants.STANDARD_COLS,
+        self,
+        usecols: List[str] = constants.STANDARD_COLS,
+        use_fake_ldms = False,
     ):
         """
         load network-specific ldms dataset
@@ -38,11 +40,16 @@ class DataHandler:
         else:
             raise ValueError("self.network must be 'hvtn' or 'covpn'")
 
+        if use_fake_ldms:
+            path = constants.FAKE_LDMS
+
         #check usecols are valid columns
         missings = set(usecols).difference(constants.LDMS_COLUMNS)
         if len(missings) > 0:
             raise Exception(f"The following aren't LDMS cols: {missings}")
 
+        if "guspec" not in usecols:
+            usecols += ["guspec"]
         ldms = pd.read_csv(path, usecols=usecols)
 
         # subset to applicable guspecs
@@ -78,6 +85,8 @@ class DataHandler:
         """
         if not cols:
             cols = constants.STANDARD_COLS
+        if not "guspec" in cols:
+            cols += ["guspec"]
         if not isinstance(self.ldms, pd.DataFrame):
             self.load_ldms(usecols=cols)
 
@@ -86,7 +95,7 @@ class DataHandler:
         if len(not_loaded) > 0:
             self.load_ldms(usecols=cols)
 
-        ldms = self.ldms
+        ldms = self.ldms[cols].copy()
 
         if incl_spec_type:
             if set(['primstr', 'dervstr']).issubset(ldms.columns):
