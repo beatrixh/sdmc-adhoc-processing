@@ -76,7 +76,8 @@ class DataHandler:
         cols: List[str],
         incl_spec_type: bool = True,
         map_drawdt: bool = True,
-        relabel: bool = True
+        relabel: bool = True,
+        enforce_typing = True
     ):
         """
         Merge self.ldms onto self.processed_data
@@ -110,6 +111,13 @@ class DataHandler:
             )
             ldms = ldms.drop(columns=["drawdy", "drawdm", "drawdd"])
 
+        if enforce_typing:
+            for col in ['txtpid', 'lstudy']:
+                if col in ldms.columns:
+                    ldms[col] = ldms[col].astype(int).astype("string")
+            if 'vidval' in ldms.columns:
+                ldms.vidval = ldms.vidval.astype("string")
+
         if relabel:
             ldms = ldms.rename(columns=constants.LDMS_RELABEL_DICT)
 
@@ -120,11 +128,6 @@ class DataHandler:
             right_on="guspec",
             how="left"
         )
-
-    def enfornce_ldms_typing():
-        for col in ['ptid', 'protocol']:
-            if col in self.processed_data.columns:
-                self.processed_data[col] = self.processed_data[col].astype(int).astype(str)
 
     def add_metadata(self, metadata: dict):
         """
